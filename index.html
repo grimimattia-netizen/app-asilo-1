@@ -40,7 +40,7 @@
                     <i class="fa-solid fa-mobile-screen"></i> Come fare App
                 </button>
                 <button onclick="switchRole()" class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-right-left">Cambia Ruolo</i>
+                    <i class="fa-solid fa-right-left"></i> Cambia Ruolo
                 </button>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
                     <i class="fa-solid fa-users"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-800 mb-2">Benvenuti al Nido</h2>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Benvenut* al Nido</h2>
                 <p class="text-sm text-slate-500 mb-8">Seleziona il tuo profilo di accesso per continuare</p>
                 
                 <div class="space-y-4">
@@ -77,8 +77,8 @@
                                 <i class="fa-solid fa-house-user text-xl"></i>
                             </div>
                             <div class="text-left">
-                                <div class="text-base">Genitore</div>
-                                <div class="text-xs text-emerald-100 font-normal">Visualizza il diario con codice figlio</div>
+                                <div class="text-base">Famiglia</div>
+                                <div class="text-xs text-emerald-100 font-normal">Visualizza il diario con codice</div>
                             </div>
                         </div>
                         <i class="fa-solid fa-chevron-right text-emerald-200"></i>
@@ -155,7 +155,7 @@
                 </div>
                 <div class="bg-amber-50/50 p-4 rounded-2xl border border-amber-200/60">
                     <div class="flex justify-between items-center mb-1">
-                        <label class="block text-xs font-bold text-amber-800 uppercase tracking-wider"><i class="fa-solid fa-key mr-1"></i> Codice Accesso Genitore</label>
+                        <label class="block text-xs font-bold text-amber-800 uppercase tracking-wider"><i class="fa-solid fa-key mr-1"></i> Codice Accesso Famiglia</label>
                         <span class="text-[10px] text-amber-700 bg-amber-200/60 px-1.5 py-0.5 rounded font-mono" id="childCodeDisplay">LEO2026</span>
                     </div>
                     <input type="text" id="childCode" placeholder="es. LEO2026" class="w-full p-2.5 bg-white border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm font-mono font-bold uppercase">
@@ -446,13 +446,13 @@
                 closeParentCode();
                 document.getElementById('roleSelectionScreen').classList.add('hidden');
                 document.getElementById('diaryAppContainer').classList.remove('hidden');
-                document.getElementById('currentRoleText').textContent = 'Modo Genitore (Sola Lettura)';
+                document.getElementById('currentRoleText').textContent = 'Modo Famiglia (Sola Lettura)';
                 document.getElementById('roleIndicator').className = 'bg-emerald-700 px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide uppercase flex items-center gap-2 border border-emerald-500/30';
                 
                 enableEditing(false);
-                showToast("Benvenuto/a! Accesso effettuato al diario del tuo bambino/bambina.");
+                showToast("Benvenuto/a! Accesso effettuato al diario del bambino/bambina.");
             } else {
-                showToast("Codice bambino/bambina non valido. Riprova (es. LEO2026)", true);
+                showToast("Codice non valido. Riprova (es. LEO2026)", true);
             }
         }
 
@@ -483,8 +483,7 @@
                 if(educatorControls) educatorControls.classList.remove('hidden');
                 if(educatorActions) educatorActions.classList.remove('hidden');
             } else {
-                if(educatorControls) educatorControls.classList.add('hidden');
-                if(educatorActions) educatorActions.classList.add('hidden');
+                if(educatorActions) educatorActions.classList.remove('hidden'); // Consente stampa/PDF anche in sola lettura se desiderato
             }
         }
 
@@ -597,7 +596,6 @@
                     console.error("Errore caricamento dati", e);
                 }
             } else {
-                // Default sample data
                 document.getElementById('childCode').value = 'LEO2026';
                 document.getElementById('childCodeDisplay').textContent = 'LEO2026';
                 diaperList = [
